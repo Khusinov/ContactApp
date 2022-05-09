@@ -1,7 +1,7 @@
 package com.khusinov.contactapp.utills
 
 object Object {
-    const val DB_NAME = "contact"
+    const val DB_NAME = "contact_db"
     const val DB_VERSION = 1
 
     const val TABLE_NAME = "contact"

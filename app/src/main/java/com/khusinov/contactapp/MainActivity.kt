@@ -2,19 +2,29 @@ package com.khusinov.contactapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.khusinov.contactapp.adapters.ContactAdapter
+import com.khusinov.contactapp.databinding.ActivityMainBinding
 import com.khusinov.contactapp.db.MyDbHelper
 import com.khusinov.contactapp.models.Contact
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var myDbHelper: MyDbHelper
+    lateinit var list: List<Contact>
+    lateinit var contactAdapter: ContactAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val myDbHelper = MyDbHelper(this)
+        myDbHelper = MyDbHelper(this)
 
-        val contact = Contact(1,"Shaxriyor" , "+998 94 233 17 05")
-       // myDbHelper.addContact(contact)
+        list = myDbHelper.getAllContact()
+        contactAdapter = ContactAdapter(list)
+        binding.rv.adapter = contactAdapter
 
-        myDbHelper.deleteContact(contact)
+
+
+
     }
 }

@@ -31,6 +31,41 @@ class MyDbHelper(context: Context) :
     override fun deleteContact(contact: Contact) {
         val database = this.writableDatabase
         database.delete(Object.TABLE_NAME, "${Object.ID} = ? ", arrayOf("${contact.id}"))
-        database.close()
+        // database.close()
+    }
+
+    override fun updateContact(contact: Contact): Int {
+        val database = this.writableDatabase
+        val cv = ContentValues()
+        cv.put(Object.ID, contact.id)
+        cv.put(Object.NAME, contact.name)
+        cv.put(Object.PHONE_NUMBER, contact.phoneNumber)
+        return database.update(
+            Object.TABLE_NAME,
+            cv,
+            "${Object.ID} = ?",
+            arrayOf(contact.id.toString())
+        )
+    }
+
+    override fun getAllContact(): List<Contact> {
+        val readableDatabase = this.readableDatabase
+        val list = ArrayList<Contact>()
+        val query = "SELECT * FROM ${Object.TABLE_NAME}"
+
+        val cursor = readableDatabase.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val id = cursor.getInt(0)
+                val name = cursor.getString(1)
+                val phoneNumber = cursor.getString(2)
+
+                val contact = Contact(id, name, phoneNumber)
+                list.add(contact)
+
+            } while (cursor.moveToNext())
+        }
+        return list
     }
 }

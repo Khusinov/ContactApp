@@ -6,4 +6,8 @@ interface DatabaseService {
     fun addContact(contact: Contact)
 
     fun deleteContact(contact: Contact)
+
+    fun updateContact(contact: Contact):Int
+
+    fun getAllContact():List<Contact>
 }
