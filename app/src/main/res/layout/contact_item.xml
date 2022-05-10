@@ -5,16 +5,12 @@
 
     <TextView
         android:id="@+id/tv"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:textSize="22sp"
+        android:textColorHint="@color/black"
+        android:text="Salom"
         android:layout_height="wrap_content"
-        android:layout_weight="6"
         />
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:src="@android:drawable/sym_action_chat"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
+
 
 </LinearLayout>
